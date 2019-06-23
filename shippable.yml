@@ -35,7 +35,8 @@ build:
     - rm --force android-ndk.zip
     - echo $ANDROID_NDK
     - echo $ANDROID_HOME
-    - ls $ANDROID_NDK
+    - cd $ANDROID_NDK
+    - ls
     # install missing Android dependencies
     - ./scripts/android-build-freerdp.sh --ndk $ANDROID_NDK --sdk $ANDROID_HOME --conf ./scripts/android-build-32.conf
 
