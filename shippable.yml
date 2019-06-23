@@ -26,16 +26,16 @@ build:
     - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-license"
     - echo "Downloading NDK (may take awhile)..."
     - export ANDROID_NDK_VERSION="14b"
-    - export ANDROID_NDK_HOME="`pwd`/android-ndk-r$ANDROID_NDK_VERSION"
+    - export ANDROID_NDK="/usr/local/android-ndk-r$ANDROID_NDK_VERSION"
     - echo "Installing ndk r${ANDROID_NDK_VERSION}"
     - echo wget --quiet --output-document=android-ndk.zip "https://dl.google.com/android/repository/android-ndk-r${ANDROID_NDK_VERSION}-linux-x86_64.zip" 
-    - echo mkdir --parents "$ANDROID_NDK_HOME" 
+    - echo mkdir --parents "$ANDROID_NDK" 
     - echo unzip -q android-ndk.zip -d "$ANDROID_NDK" 
     - echo rm --force android-ndk.zip
-    - echo $ANDROID_NDK_HOME
+    - echo $ANDROID_NDK
     - echo $ANDROID_HOME
     # install missing Android dependencies
-    - ./scripts/android-build-freerdp.sh --ndk $ANDROID_NDK_HOME --sdk $ANDROID_HOME
+    - ./scripts/android-build-freerdp.sh --ndk $ANDROID_NDK --sdk $ANDROID_HOME
 
 notifications:
     email:
