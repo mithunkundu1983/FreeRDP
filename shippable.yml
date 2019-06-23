@@ -15,7 +15,7 @@ env:
 
 build:
   pre_ci_boot:
-    image_name: mithunkundu1983/docker-android-sdk-build
+    image_name: mithunkundu1983/docker-android-build-box
     image_tag: latest
     pull: true
   ci:
