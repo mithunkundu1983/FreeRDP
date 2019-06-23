@@ -24,10 +24,6 @@ build:
     - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
     - echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
     - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-license"
-    - echo $ANDROID_NDK_HOME
-    - echo $ANDROID_HOME
-    - sudo apt-get update
-    - sudo apt-get install -u lib32stdc++6 lib32z1
     - echo "Downloading NDK (may take awhile)..."
     - export ANDROID_NDK_VERSION="14b"
     - export ANDROID_NDK_HOME="`pwd`/android-ndk-r$ANDROID_NDK_VERSION"
@@ -36,6 +32,8 @@ build:
     - echo mkdir --parents "$ANDROID_NDK_HOME" 
     - echo unzip -q android-ndk.zip -d "$ANDROID_NDK" 
     - echo rm --force android-ndk.zip
+    - echo $ANDROID_NDK_HOME
+    - echo $ANDROID_HOME
     # install missing Android dependencies
     - ./scripts/android-build-freerdp.sh --ndk $ANDROID_NDK_HOME --sdk $ANDROID_HOME
 
