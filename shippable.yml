@@ -35,3 +35,4 @@ notifications:
             - khub.bhalo.app6@gmail.com
 	on_success: change
 	on_failure: always
+    
