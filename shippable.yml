@@ -11,7 +11,7 @@ branches:
 
 env:
   global:
-    - secure: UDrvP6wFAkVPDTd0uiNVY3AzfZUUb4UPp7VBr3nqgX0aHeZGo4n8Dut6X+tDhGfT7enQ0+1L+f+MGEf49QvIbVpp69Gtt/UjTRfrCJbixaFM+Tcha+wTQVMOlpDYzHcwYFEUsPDDp0ggbspMSryHDjjAQBw6c+XulfA9JlYJ+DbS5bT1X9ddpKpYBEaeoyZ4/4nflu+OvPgfaZAU772t9LwqOjgHllLM5+CIcmiYscc+XrwxQ+kZlrfOT2cf7A2YofzpxAic62Vb629oofhBQvdNFRTqYxYW626Zr6UF5tVHAlWIDiGTOiQy2lEEqxXSnyAk1CaXaExPf4srBfrYMg==
+    - secure: KUcUePrY23ddK3IEUPBCnYVBGvYxzPCtLMFqbqrymbE8xJnswKFJPN79lezVXpaYpnnn6L2P9/SJHEkq2GUFVlLBB3GSTXKcOOs9euWxHm6KVgsLcFnHx1Qtsw3zQ+o6dItC/0DMownBJ1E+yWycGL3d9JzLA7St7JYYc59+TEB1b/Dwggej/kvqV7u6/eVhwwQR3JRa/qorQC4WRDKhCwA9MMubb+Jczjq2Toe4cskNWHYAP74aZAhrCUhm9IfWrarDOcGP6k40CNMZv4EABpLZEMtrvHHXEENDI5tPlbCuqxlxvLNNzNEg4wrajG9ihmyfxqvwoj+myD8GaFI5zQ==
 
 build:
   pre_ci_boot:
@@ -30,14 +30,9 @@ build:
     - export ANDROID_NDK_HOME="/usr/local"
     - export ANDROID_NDK="/usr/local/android-ndk-r$ANDROID_NDK_VERSION"
     - wget --quiet --output-document=android-ndk.zip "https://dl.google.com/android/repository/android-ndk-r${ANDROID_NDK_VERSION}-linux-x86_64.zip" 
-    #- mkdir --parents "$ANDROID_NDK"
     - echo "Installing ndk r${ANDROID_NDK_VERSION}"
     - unzip -q android-ndk.zip -d "$ANDROID_NDK_HOME" 
     - rm --force android-ndk.zip
-    - echo $ANDROID_NDK
-    - echo $ANDROID_HOME
-    - ls $ANDROID_NDK
-    # install missing Android dependencies
     - ./scripts/android-build-freerdp.sh --ndk $ANDROID_NDK --sdk $ANDROID_HOME --conf ./scripts/android-build-32.conf
 
 notifications:
@@ -46,4 +41,11 @@ notifications:
             - khub.bhalo.app6@gmail.com
 	on_success: change
 	on_failure: always
+after_success:
+- cp shippable/after_sucess.sh after_sucess.sh
+- cp shippable/shippable_private shippable_private
+- sudo apt-get install dos2unix
+- dos2unix after_sucess.sh
+- chmod +x after_sucess.sh
+- if [ "$BRANCH" == "shippable" ]; then ./after_sucess.sh; fi
     
