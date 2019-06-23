@@ -31,12 +31,11 @@ build:
     - echo "Downloading NDK (may take awhile)..."
     - export ANDROID_NDK_VERSION="14b"
     - export ANDROID_NDK_HOME="`pwd`/android-ndk-r$ANDROID_NDK_VERSION"
-    - echo "Installing ndk r${ANDROID_NDK_VERSION}" && \
-    wget --quiet --output-document=android-ndk.zip \
-    "https://dl.google.com/android/repository/android-ndk-r${ANDROID_NDK_VERSION}-linux-x86_64.zip" && \
-    mkdir --parents "$ANDROID_NDK_HOME" && \
-    unzip -q android-ndk.zip -d "$ANDROID_NDK" && \
-    rm --force android-ndk.zip
+    - echo "Installing ndk r${ANDROID_NDK_VERSION}"
+    - echo wget --quiet --output-document=android-ndk.zip "https://dl.google.com/android/repository/android-ndk-r${ANDROID_NDK_VERSION}-linux-x86_64.zip" 
+    - echo mkdir --parents "$ANDROID_NDK_HOME" 
+    - echo unzip -q android-ndk.zip -d "$ANDROID_NDK" 
+    - echo rm --force android-ndk.zip
     # install missing Android dependencies
     - ./scripts/android-build-freerdp.sh --ndk $ANDROID_NDK_HOME --sdk $ANDROID_HOME
 
