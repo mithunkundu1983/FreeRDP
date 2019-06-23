@@ -1,0 +1,35 @@
+archive: true
+language: java
+jdk:
+    - oraclejdk8
+
+branches:
+    only:
+        - release
+        - master
+        - Shippable
+
+env:
+  global:
+    - secure: UDrvP6wFAkVPDTd0uiNVY3AzfZUUb4UPp7VBr3nqgX0aHeZGo4n8Dut6X+tDhGfT7enQ0+1L+f+MGEf49QvIbVpp69Gtt/UjTRfrCJbixaFM+Tcha+wTQVMOlpDYzHcwYFEUsPDDp0ggbspMSryHDjjAQBw6c+XulfA9JlYJ+DbS5bT1X9ddpKpYBEaeoyZ4/4nflu+OvPgfaZAU772t9LwqOjgHllLM5+CIcmiYscc+XrwxQ+kZlrfOT2cf7A2YofzpxAic62Vb629oofhBQvdNFRTqYxYW626Zr6UF5tVHAlWIDiGTOiQy2lEEqxXSnyAk1CaXaExPf4srBfrYMg==
+
+build:
+  pre_ci_boot:
+    image_name: mithunkundu1983/docker-android-sdk-build
+    image_tag: latest
+    pull: true
+  ci:
+    # accept licenses - create a folder to store the license CRC
+    - mkdir "$ANDROID_HOME/licenses" || true
+    - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+    - echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
+    - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-license"
+    # install missing Android dependencies
+    - ./scripts/android-build-freerdp.sh --ndk $ANDROID_NDK_HOME --sdk $ANDROID_HOME
+
+notifications:
+    email:
+        recipients:
+            - khub.bhalo.app6@gmail.com
+	on_success: change
+	on_failure: always
