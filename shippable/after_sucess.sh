@@ -6,10 +6,11 @@ curl -X POST https://api.dropboxapi.com/2/files/create_folder_v2 \
     --header "Content-Type: application/json" \
     --data "{\"path\": \"/JniFiles/FreeRDP\",\"autorename\": false}"
 
-cd "client/Android/Studio/freeRDPCore/src/main"
-NEWDATE = `date +%Y-%m-%d`
-FILENAME = "-RDP Jni.zip"
-zip -r $NEWDATE$FILENAME jniLibs
+cd "client/Android/Studio/freeRDPCore/src/main/jniLibs"
+echo ls
+export NEWDATE = `date +%Y-%m-%d`
+export FILENAME = "-RDP Jni.zip"
+zip -r $NEWDATE$FILENAME .
 ZIP_FILENAME=$(find . -type f -name "*.zip")
 echo $ZIP_FILENAME
 for item in $ZIP_FILENAME
