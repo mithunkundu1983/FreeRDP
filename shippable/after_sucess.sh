@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 ###### Upload to DropBox using v2 api
+echo $AUTH_TOKEN
 curl -X POST https://api.dropboxapi.com/2/files/create_folder_v2 \
     --header "Authorization: Bearer $AUTH_TOKEN" \
     --header "Content-Type: application/json" \
     --data "{\"path\": \"/JniFiles/FreeRDP\",\"autorename\": false}"
 
 cd "client/Android/Studio/freeRDPCore/src/main"
-newDate = `date +%Y-%m-%d`
-fileName = "-RDP Jni.zip"
-zip -r $newDate$fileName jniLibs
+NEWDATE = `date +%Y-%m-%d`
+FILENAME = "-RDP Jni.zip"
+zip -r $NEWDATE$FILENAME jniLibs
 ZIP_FILENAME=$(find . -type f -name "*.zip")
 echo $ZIP_FILENAME
 for item in $ZIP_FILENAME
