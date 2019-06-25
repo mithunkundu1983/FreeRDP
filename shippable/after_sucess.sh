@@ -10,7 +10,7 @@ cd "client/Android/Studio/freeRDPCore/src/main"
 echo ls
 NEWDATE=`date +%Y-%m-%d`
 FILENAME="RDP_Jni.zip"
-zip -r RDP_Jni.zip jniLibs/*so
+zip -r RDP_Jni.zip jniLibs/*/*.so
 ZIP_FILENAME=$(find . -type f -name "*.zip")
 echo $ZIP_FILENAME
 for item in $ZIP_FILENAME
