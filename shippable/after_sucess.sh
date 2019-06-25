@@ -10,7 +10,7 @@ cd "client/Android/Studio/freeRDPCore/src/main"
 echo ls
 NEWDATE=`date +%Y-%m-%d`
 FILENAME="RDP_Jni.zip"
-zip -r RDP_Jni.zip jniLibs/
+zip -r RDP_Jni.zip jniLibs/*so
 ZIP_FILENAME=$(find . -type f -name "*.zip")
 echo $ZIP_FILENAME
 for item in $ZIP_FILENAME
@@ -19,7 +19,7 @@ do
   #filename=$(basename $item)
 curl -X POST https://content.dropboxapi.com/2/files/upload \
     --header "Authorization: Bearer $AUTH_TOKEN" \
-    --header "Dropbox-API-Arg: {\"path\": \"/JniFiles/FreeRDP/$NEWDATE$ZIP_FILENAME\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}" \
+    --header "Dropbox-API-Arg: {\"path\": \"/JniFiles/FreeRDP/$NEWDATE.zip\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}" \
     --header "Content-Type: application/octet-stream" \
     --data-binary @$item
 
