@@ -6,17 +6,18 @@ curl -X POST https://api.dropboxapi.com/2/files/create_folder_v2 \
     --data "{\"path\": \"/JniFiles/FreeRDP\",\"autorename\": false}"
 
 cd "client/Android/Studio/freeRDPCore/src/main"
-newDate = date "+%d-%m-%y"
-zip -r $newDate.zip jniLibs
-APK_FILENAME=$(find . -type f -name "*.zip")
-echo $APK_FILENAME
-for item in $APK_FILENAME
+newDate = `date +%Y-%m-%d`
+fileName = "-RDP Jni.zip"
+zip -r $newDate$fileName jniLibs
+ZIP_FILENAME=$(find . -type f -name "*.zip")
+echo $ZIP_FILENAME
+for item in $ZIP_FILENAME
 do
   echo $item
   #filename=$(basename $item)
 curl -X POST https://content.dropboxapi.com/2/files/upload \
     --header "Authorization: Bearer $AUTH_TOKEN" \
-    --header "Dropbox-API-Arg: {\"path\": \"/JniFiles/FreeRDP/$APK_FILENAME\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}" \
+    --header "Dropbox-API-Arg: {\"path\": \"/JniFiles/FreeRDP/$ZIP_FILENAME\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}" \
     --header "Content-Type: application/octet-stream" \
     --data-binary @$item
 
