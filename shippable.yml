@@ -34,7 +34,7 @@ build:
     - echo "Installing ndk r${ANDROID_NDK_VERSION}"
     - unzip -q android-ndk.zip -d "$ANDROID_NDK_HOME" 
     - rm --force android-ndk.zip
-    - ./scripts/android-build-freerdp.sh --ndk $ANDROID_NDK --sdk $ANDROID_HOME
+    - ./scripts/android-build-freerdp.sh --ndk $ANDROID_NDK --sdk $ANDROID_HOME --conf ./scripts/android-build-32.conf
 
 notifications:
     email:
