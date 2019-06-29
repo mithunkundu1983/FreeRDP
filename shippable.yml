@@ -27,7 +27,7 @@ build:
     - echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
     - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-license"
     - echo "Downloading NDK (may take awhile)..."
-    - export ANDROID_NDK_VERSION="16b"
+    - export ANDROID_NDK_VERSION="15c"
     - export ANDROID_NDK_HOME="/usr/local"
     - export ANDROID_NDK="/usr/local/android-ndk-r$ANDROID_NDK_VERSION"
     - wget --quiet --output-document=android-ndk.zip "https://dl.google.com/android/repository/android-ndk-r${ANDROID_NDK_VERSION}-linux-x86_64.zip" 
