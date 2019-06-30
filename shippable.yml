@@ -22,6 +22,7 @@ build:
     # accept licenses - create a folder to store the license CRC
     - yes Y| sudo apt-get install cmake
     - yes Y| sudo apt-get install zip
+    - export BUILD_LOCATION="aFreeRDP/build/outputs/apk"
     - mkdir "$ANDROID_HOME/licenses" || true
     - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
     - echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
@@ -33,6 +34,7 @@ build:
     - wget --quiet --output-document=android-ndk.zip "https://dl.google.com/android/repository/android-ndk-r${ANDROID_NDK_VERSION}-linux-x86_64.zip" 
     - echo "Installing ndk r${ANDROID_NDK_VERSION}"
     - unzip -q android-ndk.zip -d "$ANDROID_NDK_HOME" 
+    - unset ANDROID_NDK_HOME
     - rm --force android-ndk.zip
     - ./scripts/android-build-freerdp.sh --ndk $ANDROID_NDK --sdk $ANDROID_HOME --conf ./scripts/android-build-32.conf
     - cd client/Android/Studio
