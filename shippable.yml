@@ -47,7 +47,7 @@ notifications:
 	on_success: change
 	on_failure: always
 after_success:
-- cp shippable/after_sucess.sh after_sucess.sh
+- cp ../../../shippable/after_sucess.sh after_sucess.sh
 - sudo apt-get install dos2unix
 - dos2unix after_sucess.sh
 - chmod +x after_sucess.sh
