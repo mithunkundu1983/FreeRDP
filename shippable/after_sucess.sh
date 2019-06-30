@@ -6,20 +6,19 @@ curl -X POST https://api.dropboxapi.com/2/files/create_folder_v2 \
     --header "Content-Type: application/json" \
     --data "{\"path\": \"/JniFiles/FreeRDP\",\"autorename\": false}"
 
-cd "client/Android/Studio/freeRDPCore/src/main"
-echo ls
-NEWDATE=`date +%Y-%m-%d`
-FILENAME="RDP_Jni.zip"
-zip -r RDP_Jni.zip jniLibs/*/*.so
-ZIP_FILENAME=$(find . -type f -name "*.zip")
-echo $ZIP_FILENAME
-for item in $ZIP_FILENAME
+cd $BUILD_LOCATION
+rm ?*unaligned?*
+rm *.txt
+rm *.json
+APK_FILENAME=$(find . -type f -name "*.apk")
+#echo $APK_FILENAME
+for item in $APK_FILENAME
 do
   echo $item
-  #filename=$(basename $item)
+  filename=$(basename $item)
 curl -X POST https://content.dropboxapi.com/2/files/upload \
     --header "Authorization: Bearer $AUTH_TOKEN" \
-    --header "Dropbox-API-Arg: {\"path\": \"/JniFiles/FreeRDP/$NEWDATE.zip\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}" \
+    --header "Dropbox-API-Arg: {\"path\": \"/JniFiles/FreeRDP/$BUILD_NUMBER-$filename\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}" \
     --header "Content-Type: application/octet-stream" \
     --data-binary @$item
 
